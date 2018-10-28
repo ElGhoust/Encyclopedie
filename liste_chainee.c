@@ -30,34 +30,52 @@ ptrMaillon_base rechercher(ptrMaillon pE, int i)
 {
     ptrMaillon parcours = pE;
     ptrMaillon_base article = NULL;
+    ptrMaillon_base matchingElement = NULL;
     int trouve = 0;
     while(parcours != NULL && trouve == 0)
     {
         article = parcours->infos;
         if(article->identifiant == i)
         {
-            article = parcours->infos;
+            matchingElement = parcours->infos;
             trouve = 1;
         }
         parcours = parcours->suivant;
     }
 
-    return article;
+    return matchingElement;
 }
 
-//void supprimer(ptrMaillon *pE, int i)
-//{
-//    ptrMaillon parcours = *pE;
-//    while(parcours->suivant->infos->identifiant != i && parcours->suivant != NULL)
-//    {
-//        parcours = parcours->suivant;
-//    }
-//    if(parcours->suivant == NULL) { return; }
-//    else
-//    {
-//        free(parcours);
-//    }
-//}
+void supprimer(ptrMaillon *pE, int i)
+{
+    ptrMaillon parcours = *pE;
+    ptrMaillon precedent;
+    ptrMaillon_base article = parcours->infos;
+
+    // Suppression en tête
+    if(parcours != NULL && article->identifiant == i)
+    {
+        *pE = parcours->suivant;
+        free(parcours);
+        return;
+    }
+
+    // Suppression au milieu
+    while(parcours != NULL && article->identifiant != i)
+    {
+        precedent = parcours;
+        parcours = parcours->suivant;
+        if(parcours != NULL)
+            article = parcours->infos;
+    }
+
+    // Si l'article n'est pas présent
+    if(parcours != NULL)
+    {
+        precedent->suivant = parcours->suivant;
+        free(parcours);
+    }
+}
 
 /****      FONCTIONS DE DEBUG      ****/
 
@@ -73,7 +91,7 @@ void afficher(ptrMaillon pE)
     if(pE == NULL) { printf("La liste est vide !"); }
     else
     {
-        printf("Affichage de la pile :\n");
+        printf("Affichage de la pile :\n\n");
         while(parcours != NULL)
         {
             article = parcours->infos;

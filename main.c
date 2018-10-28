@@ -50,10 +50,15 @@ int main(int argc, char const *argv[])
 
     lectureFichier("B46_10.dat", &ptrTete);
 
-    elementRecherche = rechercher(ptrTete, 8650316);
-    printf("\nTitre de l'element recherche : %s\n", elementRecherche->titre);
+    elementRecherche = rechercher(ptrTete, 8441741);
+    if(elementRecherche != NULL) {printf("\nTitre de l'element recherche : %s\n", elementRecherche->titre);}
 
     printf("\nTous les articles ont ete inseres.\n");
 
+    afficher(ptrTete);
+
+    supprimer(&ptrTete, 5);
+
+    afficher(ptrTete);
     return 0;
 }
