@@ -26,15 +26,24 @@ void inserer(ptrMaillon *pE, int i, char *titre, char *contenu)
     *pE = nouveau;
 }
 
-//ptrMaillon rechercher(ptrMaillon pE, int i)
-//{
-//    ptrMaillon element = pE;
-//    while(element->infos->identifiant != i)
-//    {
-//        element = element->suivant;
-//    }
-//    return element;
-//}
+ptrMaillon_base rechercher(ptrMaillon pE, int i)
+{
+    ptrMaillon parcours = pE;
+    ptrMaillon_base article = NULL;
+    int trouve = 0;
+    while(parcours != NULL && trouve == 0)
+    {
+        article = parcours->infos;
+        if(article->identifiant == i)
+        {
+            article = parcours->infos;
+            trouve = 1;
+        }
+        parcours = parcours->suivant;
+    }
+
+    return article;
+}
 
 //void supprimer(ptrMaillon *pE, int i)
 //{

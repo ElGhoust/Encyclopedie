@@ -44,14 +44,16 @@ void lectureFichier(char* nomFichier, ptrMaillon *ptrTete)
 int main(int argc, char const *argv[])
 {
     ptrMaillon ptrTete;
+    ptrMaillon_base elementRecherche;
 
     creer_encyclopedie(&ptrTete);
 
     lectureFichier("B46_10.dat", &ptrTete);
 
-    afficher(ptrTete);
+    elementRecherche = rechercher(ptrTete, 8650316);
+    printf("\nTitre de l'element recherche : %s\n", elementRecherche->titre);
 
-    printf("\nTout les article ont ete inseres.\n");
+    printf("\nTous les articles ont ete inseres.\n");
 
     return 0;
 }
