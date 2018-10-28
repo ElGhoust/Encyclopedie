@@ -3,6 +3,7 @@
 #include <fcntl.h>
 
 #include "liste_chainee.h"
+#include "menu.h"
 
 void lectureFichier(char* nomFichier, ptrMaillon *ptrTete)
 {
@@ -43,22 +44,36 @@ void lectureFichier(char* nomFichier, ptrMaillon *ptrTete)
 
 int main(int argc, char const *argv[])
 {
+    int menuChoix = -1;
     ptrMaillon ptrTete;
     ptrMaillon_base elementRecherche;
 
     creer_encyclopedie(&ptrTete);
-
     lectureFichier("B46_10.dat", &ptrTete);
 
-    elementRecherche = rechercher(ptrTete, 8441741);
-    if(elementRecherche != NULL) {printf("\nTitre de l'element recherche : %s\n", elementRecherche->titre);}
+    do
+    {
+        afficherMenu();
+        menuChoix = choix();
+        switch(menuChoix)
+        {
+            case 1:
+                elementRecherche = rechercher(ptrTete, 8441741);
+                if(elementRecherche != NULL) {printf("\nTitre de l'element recherche : %s\n", elementRecherche->titre);}
+                break;
+            case 2:
+                supprimer(&ptrTete, 2);
+                break;
+            case 3:
+                afficher(ptrTete);
+                break;
+            case 4:
+                printf("Au plaisir de vous revoir !\n");
+                break;
+            default:
+                printf("...");
+        }
+    }while(menuChoix != 4);
 
-    printf("\nTous les articles ont ete inseres.\n");
-
-    afficher(ptrTete);
-
-    supprimer(&ptrTete, 5);
-
-    afficher(ptrTete);
     return 0;
 }

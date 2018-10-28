@@ -32,6 +32,7 @@ ptrMaillon_base rechercher(ptrMaillon pE, int i)
     ptrMaillon_base article = NULL;
     ptrMaillon_base matchingElement = NULL;
     int trouve = 0;
+
     while(parcours != NULL && trouve == 0)
     {
         article = parcours->infos;
@@ -91,11 +92,11 @@ void afficher(ptrMaillon pE)
     if(pE == NULL) { printf("La liste est vide !"); }
     else
     {
-        printf("Affichage de la pile :\n\n");
+        printf("Affichage de l'encyclopedie...\n");
         while(parcours != NULL)
         {
             article = parcours->infos;
-            printf("Article numero %d\n", article->identifiant);
+            printf("--- Article numero %d ---\n", article->identifiant);
             printf("Titre: %s\n", article->titre);
             printf("Contenu: %s\n\n", article->contenu);
             parcours = parcours->suivant;
