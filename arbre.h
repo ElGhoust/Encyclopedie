@@ -12,7 +12,7 @@
  // Structure spécifique à un arbre
 typedef struct maillon
 {
-    struct ptrMaillon_base *infos;
+    struct maillon_base *infos;
     struct maillon *fils_gauche;
     struct maillon *fils_droit;
 }maillon, *ptrMaillon;
@@ -21,6 +21,8 @@ typedef struct maillon
 ///*** FONCTIONS SPECIFIQUES ***/
 
 void creer_encyclopedie(ptrMaillon *pE);
+
+ptrMaillon creationNoeud(int i, char *titre, char* contenu);
 
 void inserer(ptrMaillon *pE, int i, char *titre, char *contenu);
 

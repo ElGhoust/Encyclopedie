@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <string.h>
 
 #include "menu.h"
 
@@ -44,13 +45,23 @@ void lectureFichier(char* nomFichier, ptrMaillon *ptrTete)
 int main(int argc, char const *argv[])
 {
     int menuChoix = -1;
-    int idASup = -1;
-    int idARechercher = -1;
     ptrMaillon ptrTete;
     ptrMaillon_base elementRecherche;
 
     creer_encyclopedie(&ptrTete);
-    lectureFichier("B46_10.dat", &ptrTete);
+    //lectureFichier("B46_10.dat", &ptrTete);
+
+    /** JEU DE TEST **/
+    ptrMaillon maillon1 = creationNoeud(1, "Titre1", "Contenu1");
+    ptrMaillon maillon2 = creationNoeud(2, "Titre2", "Contenu2");
+    ptrMaillon maillon3 = creationNoeud(3, "Titre3", "Contenu3");
+    ptrMaillon maillon4 = creationNoeud(4, "Titre4", "Contenu4");
+
+    ptrTete = maillon3;
+    ptrTete->fils_droit = maillon4;
+    ptrTete->fils_gauche = maillon1;
+    maillon1->fils_droit = maillon2;
+    /*****************/
 
     do
     {
