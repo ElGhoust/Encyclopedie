@@ -89,7 +89,7 @@ void afficher(ptrMaillon pE)
 {
     ptrMaillon parcours = pE;
     ptrMaillon_base article;
-    if(pE == NULL) { printf("La liste est vide !"); }
+    if(pE == NULL) { printf("La liste est vide !\n\n"); }
     else
     {
         printf("Affichage de l'encyclopedie...\n");

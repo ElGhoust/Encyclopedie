@@ -20,3 +20,27 @@ void afficherMenu()
     printf("3) Afficher l'encyclopedie\n");
     printf("4) Quitter\n");
 }
+
+void processus_suppression(ptrMaillon *ptrTete)
+{
+    int idASup = -1;
+
+    printf("Veuillez entrer l'identifiant de l'article a supprimer...\n");
+    idASup = choix();
+    supprimer(ptrTete, idASup);
+}
+
+ptrMaillon_base processus_recherche(ptrMaillon ptrTete)
+{
+    int idARechercher;
+    ptrMaillon_base recherche;
+
+    printf("Veuillez entrer l'identifiant de l'article a rechercher...\n");
+    idARechercher = choix();
+    recherche = rechercher(ptrTete, idARechercher);
+
+    if(recherche != NULL) {printf("\nTitre de l'element recherche : %s.\n", recherche->titre);}
+    else {printf("\nAucun element ne correspond a l'identidiant %d.\n\n", idARechercher);}
+
+    return recherche;
+}

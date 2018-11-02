@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-#include "liste_chainee.h"
 #include "menu.h"
 
 void lectureFichier(char* nomFichier, ptrMaillon *ptrTete)
@@ -45,6 +44,8 @@ void lectureFichier(char* nomFichier, ptrMaillon *ptrTete)
 int main(int argc, char const *argv[])
 {
     int menuChoix = -1;
+    int idASup = -1;
+    int idARechercher = -1;
     ptrMaillon ptrTete;
     ptrMaillon_base elementRecherche;
 
@@ -58,11 +59,10 @@ int main(int argc, char const *argv[])
         switch(menuChoix)
         {
             case 1:
-                elementRecherche = rechercher(ptrTete, 8441741);
-                if(elementRecherche != NULL) {printf("\nTitre de l'element recherche : %s\n", elementRecherche->titre);}
+                elementRecherche = processus_recherche(ptrTete);
                 break;
             case 2:
-                supprimer(&ptrTete, 2);
+                processus_suppression(&ptrTete);
                 break;
             case 3:
                 afficher(ptrTete);
@@ -71,7 +71,7 @@ int main(int argc, char const *argv[])
                 printf("Au plaisir de vous revoir !\n");
                 break;
             default:
-                printf("...");
+                printf("\n...\n\n");
         }
     }while(menuChoix != 4);
 

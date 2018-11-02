@@ -1,10 +1,13 @@
-#include "structures.h"
+#ifndef LISTE_CHAINEE_H_INCLUDED
+#define LISTE_CHAINEE_H_INCLUDED
 
 /****************************
  *                          *
  *      LISTE CHAINEE       *
  *                          *
  ****************************/
+
+ #include "structures.h"
 
 // Structure spécifique à une liste chaînée
 typedef struct maillon
@@ -26,3 +29,4 @@ ptrMaillon_base rechercher(ptrMaillon pE, int i);
 
 void afficher(ptrMaillon pE);
 
+#endif // LISTE_CHAINEE_H_INCLUDED
