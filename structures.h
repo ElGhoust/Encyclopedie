@@ -3,7 +3,7 @@
 
 typedef struct maillon_base
 {
-    int identifiant;
+    unsigned int identifiant;
     char *titre;
     char *contenu;
 } maillon_base, *ptrMaillon_base;

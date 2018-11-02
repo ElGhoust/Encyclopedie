@@ -32,7 +32,32 @@ ptrMaillon creationNoeud(int i, char *titre, char* contenu)
 
 void inserer(ptrMaillon *pE, int i, char *titre, char *contenu)
 {
+    ptrMaillon nouveau = creationNoeud(i, titre, contenu);
+    ptrMaillon arbre = *pE;
+    ptrMaillon noeud = NULL;
 
+    if(arbre)
+    {
+        do
+        {
+            noeud = arbre;
+            if(i > arbre->infos->identifiant)
+            {
+                arbre = arbre->fils_droit;
+                if(!arbre) noeud->fils_droit = nouveau;
+            }
+            else
+            {
+                arbre = arbre->fils_gauche;
+                if(!arbre) noeud->fils_gauche = nouveau;
+            }
+        }
+        while(arbre);
+    }
+    else
+    {
+        *pE = nouveau;
+    }
 }
 
 void supprimer(ptrMaillon *pE, int i)
@@ -43,11 +68,15 @@ void supprimer(ptrMaillon *pE, int i)
 ptrMaillon_base rechercher(ptrMaillon pE, int i)
 {
     ptrMaillon_base articleRecherche = NULL;
+    int trouve = 0;
 
-    while(pE != NULL)
+    while(pE != NULL && trouve == 0)
     {
         if(pE->infos->identifiant == i)
+        {
             articleRecherche = pE->infos;
+            trouve = 1;
+        }
 
         if(i < pE->infos->identifiant)
             pE = pE->fils_gauche;

@@ -13,10 +13,10 @@ void lectureFichier(char* nomFichier, ptrMaillon *ptrTete)
     char* Titre;
     char* Contenu;
     char* token;
-    char* ligne = malloc(sizeof(char) * 5000);
+    char* ligne = malloc(sizeof(char) * 50000);
 
     fp = fopen(nomFichier, "r");
-    while(fgets(ligne, 5000, fp) != NULL)
+    while(fgets(ligne, 50000, fp) != NULL)
     {
         token = strtok(ligne, "|");
         while(token != NULL)
@@ -49,19 +49,7 @@ int main(int argc, char const *argv[])
     ptrMaillon_base elementRecherche;
 
     creer_encyclopedie(&ptrTete);
-    //lectureFichier("B46_10.dat", &ptrTete);
-
-    /** JEU DE TEST **/
-    ptrMaillon maillon1 = creationNoeud(1, "Titre1", "Contenu1");
-    ptrMaillon maillon2 = creationNoeud(2, "Titre2", "Contenu2");
-    ptrMaillon maillon3 = creationNoeud(3, "Titre3", "Contenu3");
-    ptrMaillon maillon4 = creationNoeud(4, "Titre4", "Contenu4");
-
-    ptrTete = maillon3;
-    ptrTete->fils_droit = maillon4;
-    ptrTete->fils_gauche = maillon1;
-    maillon1->fils_droit = maillon2;
-    /*****************/
+    lectureFichier("B46_31000.dat", &ptrTete);
 
     do
     {
