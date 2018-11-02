@@ -32,6 +32,7 @@ ptrMaillon creationNoeud(int i, char *titre, char* contenu)
 
 void inserer(ptrMaillon *pE, int i, char *titre, char *contenu)
 {
+
 }
 
 void supprimer(ptrMaillon *pE, int i)
@@ -41,23 +42,34 @@ void supprimer(ptrMaillon *pE, int i)
 
 ptrMaillon_base rechercher(ptrMaillon pE, int i)
 {
-    printf("\n\nAUCUNE RECHERCHE DISPONIBLE...\n\n");
-    return NULL;
+    ptrMaillon_base articleRecherche = NULL;
+
+    while(pE != NULL)
+    {
+        if(pE->infos->identifiant == i)
+            articleRecherche = pE->infos;
+
+        if(i < pE->infos->identifiant)
+            pE = pE->fils_gauche;
+        else
+            pE = pE->fils_droit;
+    }
+
+    return articleRecherche;
 }
 
 void afficher(ptrMaillon pE)
 {
     if(!pE) return;
 
-    if(pE->fils_gauche != NULL)
+    if(pE->fils_gauche)
     {
         afficher(pE->fils_gauche);
     }
 
-    ptrMaillon_base article = pE->infos;
-    printf("Valeur = %d\n", article->identifiant);
+    printf("Valeur = %d\n", pE->infos->identifiant);
 
-    if(pE->fils_droit != NULL)
+    if(pE->fils_droit)
     {
         afficher(pE->fils_droit);
     }

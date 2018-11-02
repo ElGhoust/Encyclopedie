@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1541167564 source:d:\documents\projets en c\encyclopedie\main.c
+1541169440 source:d:\documents\projets en c\encyclopedie\main.c
 	<stdio.h>
 	<stdlib.h>
 	<fcntl.h>
@@ -29,7 +29,7 @@
 1541165744 d:\documents\projets en c\encyclopedie\arbre.h
 	"structures.h"
 
-1541167609 source:d:\documents\projets en c\encyclopedie\arbre.c
+1541170386 source:d:\documents\projets en c\encyclopedie\arbre.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
