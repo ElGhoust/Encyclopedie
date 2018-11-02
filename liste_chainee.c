@@ -9,7 +9,8 @@ void creer_encyclopedie(ptrMaillon *pE)
     *pE = NULL;
 }
 
-void inserer(ptrMaillon *pE, int i, char *titre, char *contenu)
+// Permet de créer un maillon et d'allouer la mémoire.
+ptrMaillon creationNoeud(int i, char *titre, char* contenu)
 {
     ptrMaillon nouveau      = malloc(sizeof(struct maillon));
     ptrMaillon_base article = malloc(sizeof(struct maillon_base));
@@ -21,6 +22,14 @@ void inserer(ptrMaillon *pE, int i, char *titre, char *contenu)
     strcpy(article->contenu, contenu);
 
     nouveau->infos = article;
+    return nouveau;
+}
+
+// Permet l'insertion d'un maillon dans une liste
+void inserer(ptrMaillon *pE, int i, char *titre, char *contenu)
+{
+    ptrMaillon nouveau = creationNoeud(i, titre, contenu);
+
     nouveau->suivant = *pE;
 
     *pE = nouveau;

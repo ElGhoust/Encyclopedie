@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1541148755 source:d:\documents\projets en c\encyclopedie\main.c
+1541150185 source:d:\documents\projets en c\encyclopedie\main.c
 	<stdio.h>
 	<stdlib.h>
 	<fcntl.h>
@@ -10,13 +10,13 @@
 
 1540754037 d:\documents\projets en c\encyclopedie\structures.h
 
-1541148252 source:d:\documents\projets en c\encyclopedie\liste_chainee.c
+1541153388 source:d:\documents\projets en c\encyclopedie\liste_chainee.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"liste_chainee.h"
 
-1541148601 d:\documents\projets en c\encyclopedie\menu.h
+1541153023 d:\documents\projets en c\encyclopedie\menu.h
 	"liste_chainee.h"
 
 1541148943 source:d:\documents\projets en c\encyclopedie\menu.c
@@ -24,4 +24,13 @@
 	<stdlib.h>
 	<string.h>
 	"menu.h"
+
+1541151117 d:\documents\projets en c\encyclopedie\arbre.h
+	"structures.h"
+
+1541152649 source:d:\documents\projets en c\encyclopedie\arbre.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"arbre.h"
 
