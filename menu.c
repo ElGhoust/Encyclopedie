@@ -18,7 +18,8 @@ void afficherMenu()
     printf("1) Effectuer une recherche\n");
     printf("2) Supprimer un article\n");
     printf("3) Afficher l'encyclopedie\n");
-    printf("4) Quitter\n");
+    printf("4) Vider\n");
+    printf("5) Quitter\n");
 }
 
 void processus_suppression(ptrMaillon *ptrTete)

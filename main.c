@@ -2,12 +2,16 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <string.h>
+#include <time.h>
 
 #include "menu.h"
+
+#define EXIT_NUMBER 5
 
 void lectureFichier(char* nomFichier, ptrMaillon *ptrTete)
 {
     FILE* fp;
+    int time = 0;
     int identifiant;
     int i = 0;
     char* Titre;
@@ -40,6 +44,8 @@ void lectureFichier(char* nomFichier, ptrMaillon *ptrTete)
         i = 0;
     }
     fclose(fp);
+    time = clock();
+    printf("L'ensemble des articles a ete insere en %f\n\n", (float)time/CLOCKS_PER_SEC);
 }
 
 int main(int argc, char const *argv[])
@@ -49,7 +55,7 @@ int main(int argc, char const *argv[])
     ptrMaillon_base elementRecherche;
 
     creer_encyclopedie(&ptrTete);
-    lectureFichier("B46_31000.dat", &ptrTete);
+    lectureFichier("B46_310000.dat", &ptrTete);
 
     do
     {
@@ -67,12 +73,15 @@ int main(int argc, char const *argv[])
                 afficher(ptrTete);
                 break;
             case 4:
+                detruire(&ptrTete);
+                break;
+            case EXIT_NUMBER:
                 printf("Au plaisir de vous revoir !\n");
                 break;
             default:
                 printf("\n...\n\n");
         }
-    }while(menuChoix != 4);
+    }while(menuChoix != EXIT_NUMBER);
 
     return 0;
 }

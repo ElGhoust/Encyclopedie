@@ -32,4 +32,6 @@ ptrMaillon_base rechercher(ptrMaillon pE, int i);
 
 void afficher(ptrMaillon pE);
 
+void detruire(ptrMaillon *pE);
+
 #endif // ARBRE_H_INCLUDED

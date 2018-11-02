@@ -87,6 +87,23 @@ ptrMaillon_base rechercher(ptrMaillon pE, int i)
     return articleRecherche;
 }
 
+void detruire(ptrMaillon *pE)
+{
+    ptrMaillon parcours = *pE;
+    if(!pE) return;
+
+    if(parcours->fils_gauche) detruire(&parcours->fils_gauche);
+
+    if(parcours->fils_droit) detruire(&parcours->fils_droit);
+
+    free(parcours->infos->titre);
+    free(parcours->infos->contenu);
+    free(parcours->infos);
+    free(parcours);
+
+    *pE = NULL;
+}
+
 void afficher(ptrMaillon pE)
 {
     if(!pE) return;

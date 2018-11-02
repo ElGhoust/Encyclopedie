@@ -12,7 +12,7 @@
 // Structure spécifique à une liste chaînée
 typedef struct maillon
 {
-    struct ptrMaillon_base *infos;
+    struct maillon_base *infos;
     struct maillon *suivant;
 }maillon, *ptrMaillon;
 
