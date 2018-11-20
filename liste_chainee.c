@@ -105,9 +105,11 @@ void afficher(ptrMaillon pE)
         while(parcours != NULL)
         {
             article = parcours->infos;
-            printf("--- Article numero %d ---\n", article->identifiant);
-            printf("Titre: %s\n", article->titre);
-            printf("Contenu: %s\n\n", article->contenu);
+
+            printf("========================================\n");
+            printf("Id : %d\n", article->identifiant);
+            printf("Titre : %s\n", article->titre);
+            printf("Extrait : %s", article->contenu);
             parcours = parcours->suivant;
         }
     }

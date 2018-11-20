@@ -17,10 +17,10 @@ void lectureFichier(char* nomFichier, ptrMaillon *ptrTete)
     char* Titre;
     char* Contenu;
     char* token;
-    char* ligne = malloc(sizeof(char) * 50000);
+    char* ligne = malloc(sizeof(char) * 80000);
 
     fp = fopen(nomFichier, "r");
-    while(fgets(ligne, 50000, fp) != NULL)
+    while(fgets(ligne, 80000, fp) != NULL)
     {
         token = strtok(ligne, "|");
         while(token != NULL)
@@ -55,7 +55,7 @@ int main(int argc, char const *argv[])
     ptrMaillon_base elementRecherche;
 
     creer_encyclopedie(&ptrTete);
-    lectureFichier("B46_310000.dat", &ptrTete);
+    lectureFichier("B46_10.dat", &ptrTete);
 
     do
     {
@@ -73,7 +73,7 @@ int main(int argc, char const *argv[])
                 afficher(ptrTete);
                 break;
             case 4:
-                detruire(&ptrTete);
+//                detruire(&ptrTete);
                 break;
             case EXIT_NUMBER:
                 printf("Au plaisir de vous revoir !\n");

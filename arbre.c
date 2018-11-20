@@ -30,33 +30,27 @@ ptrMaillon creationNoeud(int i, char *titre, char* contenu)
     return nouveau;
 }
 
+/// TERMINE
 void inserer(ptrMaillon *pE, int i, char *titre, char *contenu)
 {
-    ptrMaillon nouveau = creationNoeud(i, titre, contenu);
     ptrMaillon arbre = *pE;
-    ptrMaillon noeud = NULL;
+    ptrMaillon nouveau;
 
-    if(arbre)
+    if (arbre == NULL)
     {
-        do
-        {
-            noeud = arbre;
-            if(i > arbre->infos->identifiant)
-            {
-                arbre = arbre->fils_droit;
-                if(!arbre) noeud->fils_droit = nouveau;
-            }
-            else
-            {
-                arbre = arbre->fils_gauche;
-                if(!arbre) noeud->fils_gauche = nouveau;
-            }
-        }
-        while(arbre);
+        nouveau = creationNoeud(i, titre, contenu);
+        *pE = nouveau;
     }
     else
     {
-        *pE = nouveau;
+        if ( i <= arbre->infos->identifiant)
+        {
+            inserer(&(arbre->fils_gauche), i, titre, contenu);
+        }
+        else
+        {
+            inserer(&(arbre->fils_droit), i, titre, contenu);
+        }
     }
 }
 
@@ -65,28 +59,35 @@ void supprimer(ptrMaillon *pE, int i)
     printf("\n\nAUCUNE SUPPRESSION DISPONIBLE...\n\n");
 }
 
+/// TERMINE
 ptrMaillon_base rechercher(ptrMaillon pE, int i)
 {
     ptrMaillon_base articleRecherche = NULL;
-    int trouve = 0;
 
-    while(pE != NULL && trouve == 0)
+    if( pE == NULL )
     {
-        if(pE->infos->identifiant == i)
+        printf("ERR : EXISTE PAS DANS L'ARBRE");
+    }
+    else
+    {
+        if ( pE->infos->identifiant == i )
         {
+            printf("L'element existe dans l'arbre");
             articleRecherche = pE->infos;
-            trouve = 1;
         }
-
-        if(i < pE->infos->identifiant)
-            pE = pE->fils_gauche;
         else
-            pE = pE->fils_droit;
+        {
+            if ( i < pE->infos->identifiant )
+                articleRecherche = rechercher(pE->fils_gauche, i);
+            else
+                articleRecherche = rechercher(pE->fils_droit, i);
+        }
     }
 
     return articleRecherche;
 }
 
+/// TERMINE
 void detruire(ptrMaillon *pE)
 {
     ptrMaillon parcours = *pE;
@@ -104,19 +105,16 @@ void detruire(ptrMaillon *pE)
     *pE = NULL;
 }
 
+/// TERMINE
 void afficher(ptrMaillon pE)
 {
-    if(!pE) return;
-
-    if(pE->fils_gauche)
+    if(pE != NULL)
     {
+        printf("========================================\n");
+        printf("Id : %d\n", pE->infos->identifiant);
+        printf("Titre : %s\n", pE->infos->titre);
+        printf("Extrait : %s", pE->infos->contenu);
         afficher(pE->fils_gauche);
-    }
-
-    printf("Valeur = %d\n", pE->infos->identifiant);
-
-    if(pE->fils_droit)
-    {
         afficher(pE->fils_droit);
     }
 }
