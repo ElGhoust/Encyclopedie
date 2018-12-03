@@ -33,12 +33,12 @@
 		</Compiler>
 		<Unit filename="arbre.c">
 			<Option compilerVar="CC" />
+			<Option compile="0" />
+			<Option link="0" />
 		</Unit>
 		<Unit filename="arbre.h" />
 		<Unit filename="liste_chainee.c">
 			<Option compilerVar="CC" />
-			<Option compile="0" />
-			<Option link="0" />
 		</Unit>
 		<Unit filename="liste_chainee.h" />
 		<Unit filename="main.c">

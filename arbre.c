@@ -54,26 +54,21 @@ void inserer(ptrMaillon *pE, int i, char *titre, char *contenu)
     }
 }
 
-void supprimer(ptrMaillon *pE, int i)
+ptrMaillon supprimer(ptrMaillon *pE, int i)
 {
-    printf("\n\nAUCUNE SUPPRESSION DISPONIBLE...\n\n");
+
 }
 
 /// TERMINE
-ptrMaillon_base rechercher(ptrMaillon pE, int i)
+ptrMaillon rechercher(ptrMaillon pE, int i)
 {
-    ptrMaillon_base articleRecherche = NULL;
+    ptrMaillon articleRecherche = NULL;
 
-    if( pE == NULL )
-    {
-        printf("ERR : EXISTE PAS DANS L'ARBRE");
-    }
-    else
+    if( pE != NULL )
     {
         if ( pE->infos->identifiant == i )
         {
-            printf("L'element existe dans l'arbre");
-            articleRecherche = pE->infos;
+            articleRecherche = pE;
         }
         else
         {

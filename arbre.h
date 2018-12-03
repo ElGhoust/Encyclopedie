@@ -26,9 +26,9 @@ ptrMaillon creationNoeud(int i, char *titre, char* contenu);
 
 void inserer(ptrMaillon *pE, int i, char *titre, char *contenu);
 
-void supprimer(ptrMaillon *pE, int i);
+ptrMaillon supprimer(ptrMaillon *pE, int i);
 
-ptrMaillon_base rechercher(ptrMaillon pE, int i);
+ptrMaillon rechercher(ptrMaillon pE, int i);
 
 void afficher(ptrMaillon pE);
 

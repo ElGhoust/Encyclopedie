@@ -35,11 +35,11 @@ void inserer(ptrMaillon *pE, int i, char *titre, char *contenu)
     *pE = nouveau;
 }
 
-ptrMaillon_base rechercher(ptrMaillon pE, int i)
+ptrMaillon rechercher(ptrMaillon pE, int i)
 {
     ptrMaillon parcours = pE;
+    ptrMaillon matchingElement = NULL;
     ptrMaillon_base article = NULL;
-    ptrMaillon_base matchingElement = NULL;
     int trouve = 0;
 
     while(parcours != NULL && trouve == 0)
@@ -47,7 +47,7 @@ ptrMaillon_base rechercher(ptrMaillon pE, int i)
         article = parcours->infos;
         if(article->identifiant == i)
         {
-            matchingElement = parcours->infos;
+            matchingElement = parcours;
             trouve = 1;
         }
         parcours = parcours->suivant;

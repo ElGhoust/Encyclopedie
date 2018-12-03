@@ -65,6 +65,8 @@ int main(int argc, char const *argv[])
         {
             case 1:
                 elementRecherche = processus_recherche(ptrTete);
+                if(elementRecherche != NULL) {printf("\nTitre de l'element recherche : %s.\n", elementRecherche->titre);}
+                else {printf("\nAucun element ne correspond a cet identidiant.\n\n");}
                 break;
             case 2:
                 processus_suppression(&ptrTete);

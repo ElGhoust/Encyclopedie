@@ -14,7 +14,7 @@ int choix()
 
 void afficherMenu()
 {
-    printf("---- MENU ----\n");
+    printf("\n\n---- MENU ----\n");
     printf("1) Effectuer une recherche\n");
     printf("2) Supprimer un article\n");
     printf("3) Afficher l'encyclopedie\n");
@@ -34,14 +34,11 @@ void processus_suppression(ptrMaillon *ptrTete)
 ptrMaillon_base processus_recherche(ptrMaillon ptrTete)
 {
     int idARechercher;
-    ptrMaillon_base recherche;
+    ptrMaillon recherche;
 
     printf("Veuillez entrer l'identifiant de l'article a rechercher...\n");
     idARechercher = choix();
     recherche = rechercher(ptrTete, idARechercher);
 
-    if(recherche != NULL) {printf("\nTitre de l'element recherche : %s.\n", recherche->titre);}
-    else {printf("\nAucun element ne correspond a l'identidiant %d.\n\n", idARechercher);}
-
-    return recherche;
+    return recherche->infos;
 }
