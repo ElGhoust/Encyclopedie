@@ -1,16 +1,13 @@
 #ifndef MENU_H_INCLUDED
 #define MENU_H_INCLUDED
 
-#include "arbre.h"
-//#include "liste_chainee.h"
-
 int choix();
 
 int choixASupprimer();
 
-void processus_suppression(ptrMaillon *ptrTete);
+int choixImplementation(int limiteBasse, int limiteHaute);
 
-ptrMaillon_base processus_recherche(ptrMaillon ptrTete);
+void afficherMenuImplementation();
 
 void afficherMenu();
 

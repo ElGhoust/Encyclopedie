@@ -10,28 +10,30 @@
  #include "structures.h"
 
  // Structure spécifique à un arbre
-typedef struct maillon
+typedef struct ABR_maillon
 {
     struct maillon_base *infos;
-    struct maillon *fils_gauche;
-    struct maillon *fils_droit;
-}maillon, *ptrMaillon;
+    struct ABR_maillon *fils_gauche;
+    struct ABR_maillon *fils_droit;
+}ABR_maillon, *ABR_ptrMaillon;
 
 
 ///*** FONCTIONS SPECIFIQUES ***/
 
-void creer_encyclopedie(ptrMaillon *pE);
+void ABR_creer_encyclopedie(ABR_ptrMaillon *pE);
 
-ptrMaillon creationNoeud(int i, char *titre, char* contenu);
+ABR_ptrMaillon ABR_creationNoeud(int i, char *titre, char* contenu);
 
-void inserer(ptrMaillon *pE, int i, char *titre, char *contenu);
+void ABR_inserer(ABR_ptrMaillon *pE, int i, char *titre, char *contenu);
 
-ptrMaillon supprimer(ptrMaillon *pE, int i);
+ABR_ptrMaillon ABR_supprimer(ABR_ptrMaillon *pE, int i);
 
-ptrMaillon rechercher(ptrMaillon pE, int i);
+ABR_ptrMaillon ABR_rechercher(ABR_ptrMaillon pE, int i);
 
-void afficher(ptrMaillon pE);
+void ABR_afficher(ABR_ptrMaillon pE);
 
-void detruire(ptrMaillon *pE);
+void ABR_detruire(ABR_ptrMaillon *pE);
+
+void AfficherConsole(ABR_ptrMaillon a, int space);
 
 #endif // ARBRE_H_INCLUDED
