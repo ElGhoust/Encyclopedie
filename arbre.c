@@ -54,28 +54,20 @@ void ABR_inserer(ABR_ptrMaillon *pE, int i, char *titre, char *contenu)
     }
 }
 
+/// TODO: A REVOIR
 ABR_ptrMaillon ABR_supprimer(ABR_ptrMaillon *pE, int i)
 {
     ABR_ptrMaillon arbre = *pE;
 
-    // base case
     if (arbre == NULL) return arbre;
 
-    // If the key to be deleted is smaller than the root's key,
-    // then it lies in left subtree
     if (i < arbre->infos->identifiant)
         arbre->fils_gauche = ABR_supprimer(&(arbre->fils_gauche), i);
-
-    // If the key to be deleted is greater than the root's key,
-    // then it lies in right subtree
     else if (i > arbre->infos->identifiant)
         arbre->fils_droit = ABR_supprimer(&(arbre->fils_droit), i);
 
-    // if key is same as root's key, then This is the node
-    // to be deleted
     else
     {
-        // node with only one child or no child
         if (arbre->fils_gauche == NULL)
         {
             ABR_ptrMaillon temp = arbre->fils_droit;
@@ -89,60 +81,15 @@ ABR_ptrMaillon ABR_supprimer(ABR_ptrMaillon *pE, int i)
             return temp;
         }
 
-        // node with two children: Get the inorder successor (smallest
-        // in the right subtree)
         ABR_ptrMaillon temp = arbre->fils_droit;
         while (temp->fils_gauche != NULL)
             temp = arbre->fils_gauche;
 
-        // Copy the inorder successor's content to this node
         arbre->infos->identifiant = temp->infos->identifiant;
 
-        // Delete the inorder successor
         arbre->fils_droit = ABR_supprimer(&(arbre->fils_droit), temp->infos->identifiant);
     }
     return arbre;
-
-    /*if(arbre == NULL) return arbre;
-
-    if(arbre->infos->identifiant == i)
-    {
-        printf("ELEMENT A SUPPRIMER DETECTE.\n");
-        if(arbre->fils_gauche == NULL && arbre->fils_droit == NULL)
-        {
-            printf("L'element ne possede pas de fils.\n");
-            free(arbre);
-        }
-        else if(arbre->fils_gauche != NULL && arbre->fils_droit == NULL)
-        {
-            printf("L'element possede 1 fils gauche.\n");
-            ABR_ptrMaillon temp = arbre->fils_gauche;
-            free(arbre);
-            return temp;
-        }
-        else if(arbre->fils_gauche == NULL && arbre->fils_droit != NULL)
-        {
-            printf("L'element possede 1 fils droit.\n");
-            ABR_ptrMaillon temp = arbre->fils_droit;
-            free(arbre);
-            return temp;
-        }
-        else if(arbre->fils_gauche != NULL && arbre->fils_droit != NULL)
-        {
-            printf("L'element possede 2 fils.\n");
-        }
-    }
-    else
-    {
-        if(arbre->infos->identifiant > i)
-        {
-            arbre = ABR_supprimer(&(arbre->fils_gauche), i);
-        }
-        else if (arbre->infos->identifiant < i)
-        {
-            arbre = ABR_supprimer(&(arbre->fils_droit), i);
-        }
-    }*/
 }
 
 /// TERMINE
@@ -178,10 +125,7 @@ void ABR_detruire(ABR_ptrMaillon *pE)
 
     if(parcours->fils_droit) ABR_detruire(&parcours->fils_droit);
 
-    free(parcours->infos->titre);
-    free(parcours->infos->contenu);
-    free(parcours->infos);
-    free(parcours);
+    ABR_libererMaillon(&parcours);
 
     *pE = NULL;
 }
@@ -198,6 +142,33 @@ void ABR_afficher(ABR_ptrMaillon pE)
         ABR_afficher(pE->fils_gauche);
         ABR_afficher(pE->fils_droit);
     }
+}
+
+ABR_ptrMaillon ABR_recherche_article_plein_texte(ABR_ptrMaillon pE, char* mot)
+{
+    ABR_ptrMaillon listeArticleMot = NULL;
+    ptrMaillon_base informationsArticle = NULL;
+    if(pE != NULL)
+    {
+        informationsArticle = pE->infos;
+        if (strstr(informationsArticle->contenu, mot) != NULL)
+        {
+            ABR_inserer(&listeArticleMot, informationsArticle->identifiant, informationsArticle->titre, informationsArticle->contenu);
+        }
+        ABR_recherche_article_plein_texte(pE->fils_gauche, mot);
+        ABR_recherche_article_plein_texte(pE->fils_droit, mot);
+    }
+    ABR_afficher(listeArticleMot);
+    return listeArticleMot;
+}
+
+void ABR_libererMaillon(ABR_ptrMaillon *pE)
+{
+    ABR_ptrMaillon maillon = *pE;
+    free(maillon->infos->titre);
+    free(maillon->infos->contenu);
+    free(maillon->infos);
+    free(maillon);
 }
 
 void AfficherConsole(ABR_ptrMaillon a, int space) {

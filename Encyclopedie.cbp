@@ -47,6 +47,10 @@
 		</Unit>
 		<Unit filename="menu.h" />
 		<Unit filename="structures.h" />
+		<Unit filename="table_hachage.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="table_hachage.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

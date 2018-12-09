@@ -7,10 +7,12 @@
 #include "menu.h"
 #include "arbre.h"
 #include "liste_chainee.h"
+#include "table_hachage.h"
 
 #define EXIT_NUMBER 6
+#define HT_SIZE 5
 
-void lectureFichier(char* nomFichier, LC_ptrMaillon *LC_ptrTete, ABR_ptrMaillon *ABR_ptrTete, int efz, int typeImplementation)
+void lectureFichier(char* nomFichier, LC_ptrMaillon *LC_ptrTete, ABR_ptrMaillon *ABR_ptrTete, HT_maillon *TableHachage, int typeImplementation)
 {
     FILE* fp;
     int time = 0;
@@ -53,7 +55,7 @@ void lectureFichier(char* nomFichier, LC_ptrMaillon *LC_ptrTete, ABR_ptrMaillon 
                 ABR_inserer(ABR_ptrTete, identifiant, Titre, Contenu);
                 break;
             case 3:
-                //HT_inserer(HT_ptrTete, identifiant, Titre, Contenu);
+                HT_inserer(TableHachage, identifiant, Titre, Contenu, HT_SIZE);
                 break;
         }
     }
@@ -79,6 +81,10 @@ int main(int argc, char const *argv[])
     ABR_ptrMaillon ABR_ArticleRecherche;
     ABR_ptrMaillon ABR_listeArticleMotComplet;
 
+    HT_maillon TableHachage[HT_SIZE];
+    ptrMaillon_base HT_ArticleRecherche;
+    LC_ptrMaillon HT_listeArticleMotComplet;
+
     afficherMenuImplementation();
     typeImplementation = choixImplementation(1, 3);
 
@@ -87,7 +93,7 @@ int main(int argc, char const *argv[])
         /** LISTE CHAINEE **/
         case 1 :
             LC_creer_encyclopedie(&LC_ptrTete);
-            lectureFichier("B46_500.dat", &LC_ptrTete, &ABR_ptrTete, 3, typeImplementation);
+            lectureFichier("B46_10.dat", &LC_ptrTete, &ABR_ptrTete, TableHachage, typeImplementation);
             do
             {
                 afficherMenu();
@@ -137,7 +143,7 @@ int main(int argc, char const *argv[])
         case 2 :
             /** ARBRE BINAIRE DE RECHERCHE **/
             ABR_creer_encyclopedie(&ABR_ptrTete);
-            lectureFichier("B46_10.dat", &LC_ptrTete, &ABR_ptrTete, 3, typeImplementation);
+            lectureFichier("B46_10.dat", &LC_ptrTete, &ABR_ptrTete, TableHachage, typeImplementation);
             do
             {
                 afficherMenu();
@@ -168,14 +174,13 @@ int main(int argc, char const *argv[])
                         AfficherConsole(ABR_ptrTete, 0);
                         break;
                     case 4:
-//                      printf("Entrez le mot a rechercher : ");
-//                      scanf("%s", motCompletRecherche);
-//                      ABR_listeArticleMotComplet = ABR_recherche_article_plein_texte(ABR_ptrTete, motCompletRecherche);
-//                      LC_afficher(LC_listeArticleMotComplet);
-//                      free(motCompletRecherche);
+                        printf("Entrez le mot a rechercher : ");
+                        scanf("%s", motCompletRecherche);
+                        ABR_listeArticleMotComplet = ABR_recherche_article_plein_texte(ABR_ptrTete, motCompletRecherche);
+                        free(motCompletRecherche);
                         break;
                     case 5:
-                        //detruire(&ABR_ptrTete);
+                        ABR_detruire(&ABR_ptrTete);
                         break;
                     case EXIT_NUMBER:
                         printf("Au plaisir de vous revoir !\n");
@@ -186,7 +191,53 @@ int main(int argc, char const *argv[])
             }while(menuChoix != EXIT_NUMBER);
             break;
         case 3 :
-            // Table de hachage
+            HT_creer_encyclopedie(TableHachage, HT_SIZE);
+            lectureFichier("B46_100.dat", &LC_ptrTete, &ABR_ptrTete, TableHachage, typeImplementation);
+            do
+            {
+                afficherMenu();
+                menuChoix = choix();
+                switch(menuChoix)
+                {
+                    case 1:
+                        printf("Veuillez entrer l'identifiant de l'article a rechercher...\n");
+                        idARechercher = choix();
+                        HT_ArticleRecherche = HT_recherche_article(TableHachage, idARechercher, HT_SIZE);
+                        if(HT_ArticleRecherche != NULL)
+                        {
+                            printf("\nTitre de l'element recherche : %s.\n", HT_ArticleRecherche->titre);
+                        }
+                        else
+                        {
+                            printf("\nAucun element ne correspond a cet identidiant.\n\n");
+                        }
+                        break;
+                    case 2:
+                        idArticleASupprimer = -1;
+                        printf("Veuillez entrer l'identifiant de l'article a supprimer...\n");
+                        idArticleASupprimer = choix();
+                        HT_supprimer(TableHachage, idArticleASupprimer, HT_SIZE);
+                        break;
+                    case 3:
+                        HT_afficher(TableHachage, HT_SIZE);
+                        break;
+                    case 4:
+                        printf("Entrez le mot a rechercher : ");
+                        scanf("%s", motCompletRecherche);
+                        HT_listeArticleMotComplet = HT_recherche_article_plein_texte(TableHachage, motCompletRecherche, HT_SIZE);
+                        LC_afficher(HT_listeArticleMotComplet);
+                        free(motCompletRecherche);
+                        break;
+                    case 5:
+                        HT_detruire(TableHachage, HT_SIZE);
+                        break;
+                    case EXIT_NUMBER:
+                        printf("Au plaisir de vous revoir !\n");
+                        break;
+                        default:
+                            printf("\n...\n\n");
+                }
+            }while(menuChoix != EXIT_NUMBER);
             break;
     }
 

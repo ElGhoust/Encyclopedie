@@ -34,6 +34,10 @@ void ABR_afficher(ABR_ptrMaillon pE);
 
 void ABR_detruire(ABR_ptrMaillon *pE);
 
+ABR_ptrMaillon ABR_recherche_article_plein_texte(ABR_ptrMaillon pE, char* mot);
+
+void ABR_libererMaillon(ABR_ptrMaillon *pE);
+
 void AfficherConsole(ABR_ptrMaillon a, int space);
 
 #endif // ARBRE_H_INCLUDED
